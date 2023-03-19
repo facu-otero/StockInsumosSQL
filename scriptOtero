@@ -1,0 +1,81 @@
+#Creo la DB
+CREATE DATABASE Stock_Insumos_fotero;
+
+#Accedo a la DB para trabajar en ella
+USE Stock_Insumos_fotero;
+
+#Creo la tabla Usuarios
+ CREATE TABLE usuarios (
+ id_usuario int auto_increment primary key not null,
+ codigo_usuario varchar(40) not null,
+ nombre_usuario varchar(40) not null
+ );
+
+#Creo la tabla Depositos
+ CREATE TABLE depositos (
+ id_deposito int auto_increment primary key not null,
+ codigo_deposito varchar(40) not null,
+ nombre_deposito varchar(40) not null
+ );
+
+#Creo la tabla Proveedores
+ CREATE TABLE proveedores (
+ id_proveedor int auto_increment primary key not null,
+ codigo_proveedor varchar(40) not null,
+ nombre_proveedor varchar(40) not null,
+ cuit_proveedor varchar(20) not null,
+ email_proveedor varchar(40) not null
+ );
+  
+#Creo la tabla Unidades
+ CREATE TABLE unidades (
+ id_unidad int auto_increment primary key not null,
+ codigo_unidad varchar(40) not null,
+ nombre_unidad varchar(40) not null
+ ); 
+ 
+ #Creo la tabla Producto
+ CREATE TABLE productos (
+ id_producto int auto_increment primary key not null,
+ codigo_producto varchar(40) not null,
+ nombre_producto varchar(40) not null,
+ costo_standar_producto float not null,
+ id_unidad int not null,
+ foreign key (id_unidad) references unidades(id_unidad)
+ );
+ 
+ #Creo la tabla Documentos
+ CREATE TABLE documentos (
+ id_documento int auto_increment primary key not null,
+ codigo_documento varchar(40) not null,
+ nombre_documento varchar(40) not null,
+ tipo_documento varchar(40) not null
+ ); 
+ 
+  #Creo la tabla Movimientos de Stock
+ CREATE TABLE movimiento_stock (
+ id_movimiento_stock int auto_increment primary key not null,
+ id_usuario int not null,
+ id_deposito int not null,
+ id_proveedor int not null,
+ id_unidad int not null,
+ id_producto int not null,
+ id_documento int not null,
+ fecha_movimiento_stock date not null,
+ nombre_documento varchar(40) not null,
+ codigo_producto varchar(40) not null,
+ nombre_usuario varchar(40) not null,
+ nombre_proveedor varchar(40) not null,
+ nombre_deposito varchar(40) not null,
+ nombre_producto varchar(40) not null,
+ cantidad_movimiento_stock int not null,
+ nombre_unidad varchar(40) not null,
+ costo_standar_producto float not null,
+ importe_movimiento_stock float not null,
+ foreign key (id_usuario) references usuarios(id_usuario),
+ foreign key (id_deposito) references depositos(id_deposito),
+ foreign key (id_proveedor) references proveedores(id_proveedor),
+ foreign key (id_unidad) references unidades(id_unidad),
+ foreign key (id_producto) references productos(id_producto),
+ foreign key (id_documento) references documentos(id_documento) 
+ ); 
